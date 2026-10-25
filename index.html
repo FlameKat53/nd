@@ -1,1 +1,851 @@
-div
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIGGERDICK.COM — Digital Graveyard of Modern Brainrot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Space Grotesk, Syne, and JetBrains Mono for authentic brutalist editorial vibe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,500;0,800;1,400&family=Space+Grotesk:wght@400;700;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#0a0a0a',
+                        graphite: '#121212',
+                        rawborder: '#262626',
+                        caution: '#ccff00', // Acid Lime/Caution Yellow
+                        crimson: '#ff2a5f',
+                        acid: '#39ff14'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 22s linear infinite',
+                        'marquee-reverse': 'marquee-reverse 22s linear infinite',
+                        'pulse-fast': 'pulse 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        'marquee-reverse': {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Noise Texture Overlay for authentic raw paper/crt feel */
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            cursor: default;
+            overflow-x: hidden;
+            font-feature-settings: "ss01", "ss02";
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            content: "";
+            opacity: 0.035;
+            pointer-events: none;
+            z-index: 999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Scanline FX */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+            z-index: 998;
+            opacity: 0.6;
+        }
+
+        /* Glitch animations */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff2a5f;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 #ccff00;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(12px, 9999px, 82px, 0); }
+            20% { clip: rect(65px, 9999px, 12px, 0); }
+            40% { clip: rect(40px, 9999px, 90px, 0); }
+            60% { clip: rect(85px, 9999px, 30px, 0); }
+            80% { clip: rect(20px, 9999px, 60px, 0); }
+            100% { clip: rect(95px, 9999px, 10px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(80px, 9999px, 20px, 0); }
+            20% { clip: rect(10px, 9999px, 90px, 0); }
+            40% { clip: rect(50px, 9999px, 15px, 0); }
+            60% { clip: rect(30px, 9999px, 70px, 0); }
+            80% { clip: rect(90px, 9999px, 40px, 0); }
+            100% { clip: rect(25px, 9999px, 85px, 0); }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border: 1px solid #ccff00;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ccff00;
+        }
+
+        /* Crosshair Custom Cursor Elements */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ccff00;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.1s, height 0.1s, background-color 0.1s;
+        }
+
+        .cursor-ring {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(204, 255, 0, 0.4);
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.05s linear;
+        }
+
+        .brutalist-card {
+            background: #121212;
+            border: 1px solid #262626;
+            transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .brutalist-card:hover {
+            border-color: #ccff00;
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px 0px #ccff00;
+        }
+
+        /* Screen Flash FX */
+        .flash-active {
+            animation: flash 0.12s ease-out;
+        }
+        @keyframes flash {
+            0% { background-color: #ccff00; }
+            100% { background-color: #0a0a0a; }
+        }
+    </style>
+</head>
+<body class="selection:bg-caution selection:text-black antialiased relative">
+
+    <!-- Noise & Scanline overlays -->
+    <div class="noise-bg"></div>
+    <div class="scanlines"></div>
+
+    <!-- Custom Brutalist Cursor -->
+    <div id="cursor-dot" class="cursor-dot hidden md:block"></div>
+    <div id="cursor-ring" class="cursor-ring hidden md:block"></div>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-50 bg-void/90 backdrop-blur-md border-b border-rawborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="inline-block w-3 h-3 bg-caution animate-ping"></span>
+                <span class="font-display font-black text-xl tracking-tighter text-white">
+                    NIGGERDICK<span class="text-caution">.COM</span>
+                </span>
+                <span class="hidden sm:inline-block font-mono text-xs px-2 py-0.5 border border-rawborder text-neutral-400 uppercase">
+                    SYS_VER: 4.2.0_ROT
+                </span>
+            </div>
+
+            <!-- Global Controls -->
+            <div class="flex items-center space-x-4 font-mono text-xs">
+                <button id="synth-toggle" onclick="toggleAudioEngine()" class="px-3 py-1.5 border border-rawborder hover:border-caution hover:text-caution transition-colors flex items-center gap-2">
+                    <span id="audio-indicator" class="w-2 h-2 rounded-full bg-neutral-600"></span>
+                    <span id="audio-text">SFX: OFF</span>
+                </button>
+                <a href="#board" class="hidden md:inline-block px-3 py-1.5 bg-caution text-black font-bold uppercase hover:bg-white transition-colors">
+                    Soundboard
+                </a>
+                <a href="#feed" class="hidden sm:inline-block hover:text-caution transition-colors">
+                    [Feed]
+                </a>
+                <a href="#about" class="hover:text-caution transition-colors">
+                    [Manifesto]
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- TOP TICKER BAR -->
+    <div class="bg-black border-b border-rawborder overflow-hidden py-2 font-mono text-xs text-neutral-400 select-none">
+        <div class="whitespace-nowrap inline-block animate-marquee uppercase tracking-wider">
+            <span class="text-caution mx-4">★ BRAINROT ARCHIVE ★</span>
+            <span class="mx-4">FREAK OFF SESSION IN PROGRESS</span>
+            <span class="text-crimson mx-4">AURA: -999,999</span>
+            <span class="mx-4">P DIDDY PARTY LIST LEAKED</span>
+            <span class="text-acid mx-4">420 WEED RESIDUE DETECTED</span>
+            <span class="mx-4">TYPE SHIT TYPE SHIT</span>
+            <span class="text-caution mx-4">SKIBIDI TOILET RIZZ</span>
+            <span class="mx-4">FANUM TAX DEDUCTED</span>
+            <span class="text-crimson mx-4">GRINDSET NO SLEEP</span>
+            <span class="text-caution mx-4">★ BRAINROT ARCHIVE ★</span>
+            <span class="mx-4">FREAK OFF SESSION IN PROGRESS</span>
+            <span class="text-crimson mx-4">AURA: -999,999</span>
+            <span class="mx-4">P DIDDY PARTY LIST LEAKED</span>
+            <span class="text-acid mx-4">420 WEED RESIDUE DETECTED</span>
+            <span class="mx-4">TYPE SHIT TYPE SHIT</span>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- 1. EDITORIAL HERO BANNER SECTION -->
+        <section class="relative border border-rawborder bg-graphite p-6 sm:p-12 overflow-hidden">
+            <!-- Background Watermark -->
+            <div class="absolute -right-10 -bottom-10 opacity-5 font-display text-[18vw] font-black leading-none select-none text-white pointer-events-none">
+                NIGGERDICK
+            </div>
+
+            <div class="relative z-10 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 border border-caution/40 bg-caution/10 text-caution font-mono text-xs">
+                    <span class="animate-pulse">●</span> INTERNET SLANG TERMINAL // EST. 2026
+                </div>
+
+                <h1 class="font-display font-black text-5xl sm:text-7xl lg:text-9xl tracking-tight leading-none text-white">
+                    NIGGERDICK<span class="text-caution glitch-text" data-text=".COM">.COM</span>
+                </h1>
+
+                <p class="font-mono text-sm sm:text-base text-neutral-400 max-w-2xl leading-relaxed">
+                    The raw, unfiltered vault of modern internet vocabulary. Deconstructing brainrot, celebrity chaos, street-wear slang, and viral Instagram algorithm hazards.
+                </p>
+
+                <!-- Interactive Hero Ticker / Live Meter -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-rawborder font-mono text-xs">
+                    <div class="p-3 border border-rawborder bg-void">
+                        <div class="text-neutral-500 mb-1">GLOBAL ROT INDEX</div>
+                        <div id="rot-meter" class="text-xl font-bold text-caution">98.4% CRITICAL</div>
+                    </div>
+                    <div class="p-3 border border-rawborder bg-void">
+                        <div class="text-neutral-500 mb-1">CURRENT TREND</div>
+                        <div class="text-xl font-bold text-white uppercase">Freak Off Protocol</div>
+                    </div>
+                    <div class="p-3 border border-rawborder bg-void">
+                        <div class="text-neutral-500 mb-1">MOST SEARCHED</div>
+                        <div class="text-xl font-bold text-crimson uppercase">P Diddy Oil</div>
+                    </div>
+                    <div class="p-3 border border-rawborder bg-void">
+                        <div class="text-neutral-500 mb-1">ORGANIC HERB</div>
+                        <div class="text-xl font-bold text-acid uppercase">Zaza / Weed</div>
+                    </div>
+                </div>
+
+                <!-- Action CTA -->
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <button onclick="triggerGlitchEvent()" class="px-6 py-3 bg-caution text-black font-mono font-bold text-sm uppercase tracking-wider hover:bg-white hover:shadow-[4px_4px_0px_0px_#ffffff] transition-all">
+                        ⚡ Trigger Brainrot Glitch
+                    </button>
+                    <button onclick="scrollToRandomTerm()" class="px-6 py-3 border border-rawborder bg-void font-mono font-bold text-sm text-white uppercase tracking-wider hover:border-caution hover:text-caution transition-all">
+                        🎲 Random Term
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. INTERACTIVE BUZZWORD SOUNDBOARD / TERM GENERATOR -->
+        <section id="board" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-rawborder pb-4 gap-4">
+                <div>
+                    <span class="font-mono text-xs text-caution uppercase">// SECTION 01</span>
+                    <h2 class="font-display font-black text-3xl sm:text-4xl text-white">INTERACTIVE BUZZWORD SOUNDBOARD</h2>
+                </div>
+                <div class="font-mono text-xs text-neutral-400">
+                    CLICK ANY CARD TO TRIGGER SYNTH SOUND & EFFECT
+                </div>
+            </div>
+
+            <!-- Filter Tags -->
+            <div class="flex flex-wrap gap-2 font-mono text-xs">
+                <button onclick="filterTerms('all')" class="term-filter active px-3 py-1 border border-caution bg-caution text-black">ALL TERMS</button>
+                <button onclick="filterTerms('slang')" class="term-filter px-3 py-1 border border-rawborder text-neutral-400 hover:border-white">INSTAGRAM SLANG</button>
+                <button onclick="filterTerms('pop')" class="term-filter px-3 py-1 border border-rawborder text-neutral-400 hover:border-white">POP CULTURE HAZARDS</button>
+                <button onclick="filterTerms('bot')" class="term-filter px-3 py-1 border border-rawborder text-neutral-400 hover:border-white">BRAINROT CORE</button>
+            </div>
+
+            <!-- Buzzword Grid -->
+            <div id="terms-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Cards injected dynamically via JS -->
+            </div>
+        </section>
+
+        <!-- 3. THE "BRAINROT FEED" GRID (MASONRY ZINE STYLE) -->
+        <section id="feed" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-rawborder pb-4 gap-4">
+                <div>
+                    <span class="font-mono text-xs text-crimson uppercase">// SECTION 02</span>
+                    <h2 class="font-display font-black text-3xl sm:text-4xl text-white">THE BRAINROT ZINE FEED</h2>
+                </div>
+                <div class="font-mono text-xs text-neutral-400">
+                    RAW CURATED DISPATCHES FROM THE ALGORITHM
+                </div>
+            </div>
+
+            <!-- Masonry Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Zine Card 1 -->
+                <div class="brutalist-card p-5 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center font-mono text-xs border-b border-rawborder pb-2">
+                            <span class="text-caution">#VOL_01</span>
+                            <span class="text-neutral-500">2026.10.24</span>
+                        </div>
+                        <div class="relative group overflow-hidden border border-rawborder bg-void aspect-video flex items-center justify-center p-4">
+                            <!-- Raw SVG illustration style -->
+                            <svg class="w-16 h-16 text-caution group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            <div class="absolute inset-0 bg-caution/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white uppercase">The 1,000 Baby Oil Bottles Incident</h3>
+                        <p class="font-mono text-xs text-neutral-400 leading-relaxed">
+                            How "P Diddy" transformed from a 90s hip-hop mogul name into the internet's universal code phrase for chaotic, over-the-top party lockdown energy.
+                        </p>
+                    </div>
+                    <div class="font-mono text-xs text-neutral-500 pt-2 border-t border-rawborder flex justify-between">
+                        <span>TAG: P_DIDDY</span>
+                        <span class="text-crimson">AURA: -500</span>
+                    </div>
+                </div>
+
+                <!-- Zine Card 2 -->
+                <div class="brutalist-card p-5 space-y-4 flex flex-col justify-between bg-graphite md:col-span-2">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center font-mono text-xs border-b border-rawborder pb-2">
+                            <span class="text-acid">#ESSAY_MANIFESTO</span>
+                            <span class="text-neutral-500">READ TIME: 1.5 MIN</span>
+                        </div>
+                        <h3 class="font-display font-black text-2xl sm:text-3xl text-white uppercase">
+                            Why Instagram Comment Sections Look Like A Simulation
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <p class="font-mono text-xs text-neutral-400 leading-relaxed">
+                                Open any Instagram Reel posted in the last 24 hours. Scroll down 3 inches. You will encounter a endless sea of: <br><br>
+                                <span class="text-white">"bro think he him 💀"</span><br>
+                                <span class="text-white">"freak off in comments"</span><br>
+                                <span class="text-white">"type shit type shit"</span><br>
+                                <span class="text-white">"who let bro cook"</span>
+                            </p>
+                            <div class="p-4 border border-rawborder bg-void font-mono text-xs space-y-2">
+                                <div class="text-caution font-bold">ALGORITHM OBSERVATION #88</div>
+                                <div class="text-neutral-400">Language has compressed. Vocabulary exists strictly in 3-second soundbites designed to maximize dopamine retention and comment-section fights.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="font-mono text-xs text-neutral-500 pt-2 border-t border-rawborder flex justify-between">
+                        <span>METRIC: ALGORITHMIC_ROT</span>
+                        <span class="text-caution">STATUS: ACTIVE</span>
+                    </div>
+                </div>
+
+                <!-- Zine Card 3 -->
+                <div class="brutalist-card p-5 space-y-4 flex flex-col justify-between md:col-span-2">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center font-mono text-xs border-b border-rawborder pb-2">
+                            <span class="text-caution">#HERB_CULTURE</span>
+                            <span class="text-neutral-500">BOTANICAL ANALYTICS</span>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl text-white uppercase">Weed & The Zaza Lexicon</h3>
+                        <p class="font-mono text-xs text-neutral-400 leading-relaxed">
+                            From basic cannabis slang to ultra-stylized internet terms like "loud", "zaza", "gas", and "boof". Modern Instagram slang treats weed not just as a plant, but as an aesthetic badge of honor for late-night scrolling sprees.
+                        </p>
+                    </div>
+                    <div class="font-mono text-xs text-neutral-500 pt-2 border-t border-rawborder flex justify-between">
+                        <span>TAG: WEED_ZAZA</span>
+                        <span class="text-acid">THC_INDEX: HIGH</span>
+                    </div>
+                </div>
+
+                <!-- Zine Card 4 -->
+                <div class="brutalist-card p-5 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center font-mono text-xs border-b border-rawborder pb-2">
+                            <span class="text-crimson">#WARNING</span>
+                            <span class="text-neutral-500">ALERT</span>
+                        </div>
+                        <div class="p-4 border border-crimson/30 bg-crimson/5 text-crimson font-mono text-xs space-y-2">
+                            <div class="font-bold text-sm">⚠️ CRITICAL BRAINROT OVERLOAD</div>
+                            <div>If you understand every term on NIGGERDICK.com without looking up definitions, please touch grass immediately.</div>
+                        </div>
+                    </div>
+                    <button onclick="playGlitchTone()" class="w-full py-2 border border-rawborder bg-void font-mono text-xs text-white hover:bg-caution hover:text-black transition-colors">
+                        [EXECUTE REBOOT]
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. DOMAIN LANDING / ABOUT MANIFESTO SECTION -->
+        <section id="about" class="border border-rawborder bg-graphite p-6 sm:p-12 relative overflow-hidden">
+            <div class="max-w-3xl space-y-6">
+                <div class="inline-block px-3 py-1 bg-white text-black font-mono text-xs font-bold uppercase">
+                    MANIFESTO // NIGGERDICK.COM
+                </div>
+
+                <h2 class="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
+                    THE DIGITAL GRAVEYARD OF REEL CULTURE
+                </h2>
+
+                <div class="font-mono text-sm text-neutral-300 space-y-4 leading-relaxed">
+                    <p>
+                        Welcome to <strong class="text-caution">NIGGERDICK.com</strong>. We built this domain as an anti-polished monument to the absolute chaotic state of modern social media language.
+                    </p>
+                    <p>
+                        Where traditional web design gives you round pastel buttons, floating glassmorphism, and corporate AI polish—we give you raw monochrome grit, harsh borders, and an unfiltered index of internet brainrot terms like <span class="text-white border-b border-caution">freak off</span>, <span class="text-white border-b border-caution">p diddy</span>, <span class="text-white border-b border-caution">weed</span>, and <span class="text-white border-b border-caution">type shit</span>.
+                    </p>
+                    <p class="text-neutral-400">
+                        NIGGERDICK.com is fully self-aware. It serves as both a joke, a street-style archive, and a mirror held up to the algorithm that consumes our collective attention span 15 seconds at a time.
+                    </p>
+                </div>
+
+                <div class="pt-6 border-t border-rawborder flex flex-wrap gap-6 font-mono text-xs text-neutral-400">
+                    <div>
+                        <span class="text-neutral-600 block">DOMAIN</span>
+                        <span class="text-white">NIGGERDICK.COM</span>
+                    </div>
+                    <div>
+                        <span class="text-neutral-600 block">DESIGN SYSTEM</span>
+                        <span class="text-white">RAW BRUTALIST ZINE</span>
+                    </div>
+                    <div>
+                        <span class="text-neutral-600 block">AI POLISH</span>
+                        <span class="text-crimson">0% (PURPOSEFULLY RAW)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. INTERACTIVE SLANG GENERATOR TERMINAL -->
+        <section class="border border-rawborder bg-void p-6 font-mono space-y-4">
+            <div class="flex justify-between items-center text-xs text-neutral-500 border-b border-rawborder pb-3">
+                <span>TERMINAL_OUTPUT.EXE</span>
+                <span class="text-caution">INTERACTIVE SLANG SYNTHESIZER</span>
+            </div>
+
+            <div id="terminal-screen" class="bg-black p-4 border border-rawborder text-xs sm:text-sm text-acid min-h-[120px] font-mono leading-relaxed overflow-x-auto">
+                > System initialized.<br>
+                > Ready to synthesize brainrot sentence...<br>
+                > Click button below to run...
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+                <button onclick="generateBrainrotSentence()" class="px-4 py-2 bg-caution text-black text-xs font-bold uppercase hover:bg-white transition-colors">
+                    ▶ Generate Random Brainrot Quote
+                </button>
+                <button onclick="copyTerminalText()" class="px-4 py-2 border border-rawborder text-white text-xs uppercase hover:border-caution transition-colors">
+                    📋 Copy Text
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-rawborder bg-void py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-xs text-neutral-500">
+            <div class="space-y-1 text-center md:text-left">
+                <div class="text-white font-bold font-display tracking-tight text-base">NIGGERDICK.COM</div>
+                <div>THE ARCHIVE OF ALGORITHMIC ROT & SOCIAL MEDIA SLANG</div>
+            </div>
+
+            <div class="flex flex-wrap gap-6 text-neutral-400">
+                <a href="#board" class="hover:text-caution transition-colors">SOUNDBOARD</a>
+                <a href="#feed" class="hover:text-caution transition-colors">ZINE FEED</a>
+                <a href="#about" class="hover:text-caution transition-colors">MANIFESTO</a>
+            </div>
+
+            <div class="text-right">
+                <span class="text-caution">NO AI PASTEL GRADIENTS ALLOWED</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ------------------------------------------------------------------
+           1. DATA STRUCTURE: BUZZWORDS & DEFINITIONS
+           ------------------------------------------------------------------ */
+        const BUZZWORDS = [
+            {
+                id: 'freak-off',
+                term: 'FREAK OFF',
+                pos: '[VERB / NOUN]',
+                category: 'pop',
+                aura: '-10,000 AURA',
+                definition: 'An wild, unrestrained, late-night party or chaotic binge. Recently popularized in internet culture via breaking legal document leaks.',
+                quote: '"Bro said he was hosting a study session but it turned into a full freak off."',
+                color: 'crimson',
+                freq: 220
+            },
+            {
+                id: 'p-diddy',
+                term: 'P DIDDY',
+                pos: '[NOUN / MEME]',
+                category: 'pop',
+                aura: '-999,999 AURA',
+                definition: 'The ultimate internet slang catalyst for suspicious party invites, excessive baby oil memes, and wild celebrity lore.',
+                quote: '"Who invited bro? He giving severe P Diddy party energy right now."',
+                color: 'crimson',
+                freq: 180
+            },
+            {
+                id: 'weed',
+                term: 'WEED / ZAZA',
+                pos: '[HERB / ESSENCE]',
+                category: 'slang',
+                aura: '+420 AURA',
+                definition: 'Cannabis. In modern Instagram reel vernacular, often referred to as "zaza", "gas", "boof", or "loud".',
+                quote: '"That zaza got bro speaking fluent binary in the comment section."',
+                color: 'acid',
+                freq: 420
+            },
+            {
+                id: 'brainrot',
+                term: 'BRAINROT',
+                pos: '[NOUN / CONDITION]',
+                category: 'bot',
+                aura: 'INFINITY ROT',
+                definition: 'The cognitive decline caused by scrolling TikTok or Instagram reels for 6 straight hours until your thoughts consist only of audio clips.',
+                quote: '"My brainrot is so severe I responded to my boss with \'type shit\' during my performance review."',
+                color: 'caution',
+                freq: 300
+            },
+            {
+                id: 'type-shit',
+                term: 'TYPE SHIT',
+                pos: '[EXPRESSION]',
+                category: 'slang',
+                aura: '+500 AURA',
+                definition: 'A universal nod of agreement used to end any conversation when you ran out of processing power to form a full sentence.',
+                quote: '"Yeah man I\'m just chilling, type shit."',
+                color: 'caution',
+                freq: 350
+            },
+            {
+                id: 'rizz',
+                term: 'RIZZ',
+                pos: '[NOUN]',
+                category: 'slang',
+                aura: '+1,000 AURA',
+                definition: 'Short for charisma. The innate ability to charm someone without trying. Subtypes include Unspoken Rizz and W Rizz.',
+                quote: '"Bro pulled up with zero setup and deployed unspoken rizz."',
+                color: 'acid',
+                freq: 500
+            },
+            {
+                id: 'aura',
+                term: 'AURA',
+                pos: '[METRIC]',
+                category: 'slang',
+                aura: 'EVALUATING...',
+                definition: 'The invisible scoreboard of cool points. Dropping your phone in public is -500 aura. Walking off a stumble smoothly is +1000 aura.',
+                quote: '"Trip on the sidewalk? -1000 aura instantly."',
+                color: 'caution',
+                freq: 280
+            },
+            {
+                id: 'skibidi',
+                term: 'SKIBIDI',
+                pos: '[ADJECTIVE]',
+                category: 'bot',
+                aura: 'NEUTRAL',
+                definition: 'The foundational pillar of modern youth brainrot. Functions as cool, bad, or meaningless depending on context.',
+                quote: '"That is not very skibidi of you bro."',
+                color: 'crimson',
+                freq: 600
+            },
+            {
+                id: 'fanum-tax',
+                term: 'FANUM TAX',
+                pos: '[VERB]',
+                category: 'bot',
+                aura: '-50 AURA',
+                definition: 'The act of stealing food from your friend\'s plate under the guise of an inevitable social tax.',
+                quote: '"Bro reached over and fanum taxed my last fry."',
+                color: 'caution',
+                freq: 450
+            }
+        ];
+
+        /* ------------------------------------------------------------------
+           2. RENDER SOUNDBOARD CARDS
+           ------------------------------------------------------------------ */
+        function renderTerms(filter = 'all') {
+            const container = document.getElementById('terms-container');
+            container.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? BUZZWORDS 
+                : BUZZWORDS.filter(item => item.category === filter);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `brutalist-card p-5 space-y-3 cursor-pointer group select-none ${item.id}`;
+                card.setAttribute('onclick', `triggerTermCard('${item.id}', ${item.freq})`);
+
+                const accentColorClass = item.color === 'crimson' 
+                    ? 'text-crimson' 
+                    : item.color === 'acid' 
+                    ? 'text-acid' 
+                    : 'text-caution';
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start font-mono text-xs border-b border-rawborder pb-2">
+                        <span class="text-neutral-500">${item.pos}</span>
+                        <span class="${accentColorClass} font-bold">${item.aura}</span>
+                    </div>
+                    <h3 class="font-display font-black text-2xl text-white group-hover:translate-x-1 transition-transform uppercase">
+                        ${item.term}
+                    </h3>
+                    <p class="font-mono text-xs text-neutral-400 leading-relaxed">
+                        ${item.definition}
+                    </p>
+                    <div class="p-2 border border-rawborder bg-void font-mono text-[11px] text-neutral-300 italic">
+                        ${item.quote}
+                    </div>
+                    <div class="pt-2 flex justify-between items-center font-mono text-[10px] text-neutral-500">
+                        <span>CLICK TO PLAY SFX</span>
+                        <span class="group-hover:text-white">▶ TRIGGER</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterTerms(category) {
+            document.querySelectorAll('.term-filter').forEach(btn => {
+                btn.className = 'term-filter px-3 py-1 border border-rawborder text-neutral-400 hover:border-white';
+            });
+            event.target.className = 'term-filter active px-3 py-1 border border-caution bg-caution text-black font-bold';
+            renderTerms(category);
+        }
+
+        /* ------------------------------------------------------------------
+           3. WEB AUDIO SYNTHESIZER (NO EXTERNAL MP3 DEPENDENCIES)
+           ------------------------------------------------------------------ */
+        let audioCtx = null;
+        let audioEnabled = false;
+
+        function toggleAudioEngine() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            audioEnabled = !audioEnabled;
+            
+            const indicator = document.getElementById('audio-indicator');
+            const text = document.getElementById('audio-text');
+
+            if (audioEnabled) {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                indicator.className = 'w-2 h-2 rounded-full bg-caution animate-pulse';
+                text.innerText = 'SFX: ON';
+                playGlitchTone(440, 'sine', 0.1);
+            } else {
+                indicator.className = 'w-2 h-2 rounded-full bg-neutral-600';
+                text.innerText = 'SFX: OFF';
+            }
+        }
+
+        function playGlitchTone(freq = 300, type = 'sawtooth', duration = 0.15) {
+            if (!audioEnabled || !audioCtx) return;
+
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                // Pitch drop effect
+                osc.frequency.exponentialRampToValueAtTime(Math.max(40, freq / 4), audioCtx.currentTime + duration);
+
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.log('Audio playback error', e);
+            }
+        }
+
+        /* ------------------------------------------------------------------
+           4. INTERACTIVE CARD & GLITCH EFFECTS
+           ------------------------------------------------------------------ */
+        function triggerTermCard(id, freq) {
+            playGlitchTone(freq || 350, 'sawtooth', 0.2);
+            document.body.classList.add('flash-active');
+            setTimeout(() => document.body.classList.remove('flash-active'), 120);
+
+            // Log to terminal
+            const termObj = BUZZWORDS.find(b => b.id === id);
+            if (termObj) {
+                const screen = document.getElementById('terminal-screen');
+                screen.innerHTML = `> [TRIGGERED]: ${termObj.term}<br>> AURA EFFECT: ${termObj.aura}<br>> SAMPLE QUOTE: ${termObj.quote}`;
+            }
+        }
+
+        function triggerGlitchEvent() {
+            playGlitchTone(150, 'square', 0.3);
+            document.body.style.filter = 'invert(1)';
+            setTimeout(() => {
+                document.body.style.filter = 'none';
+            }, 100);
+
+            // Randomize rot meter
+            const meter = document.getElementById('rot-meter');
+            const randomVal = (Math.random() * 20 + 80).toFixed(1);
+            meter.innerText = `${randomVal}% CRITICAL`;
+        }
+
+        function scrollToRandomTerm() {
+            const randomObj = BUZZWORDS[Math.floor(Math.random() * BUZZWORDS.length)];
+            triggerTermCard(randomObj.id, randomObj.freq);
+            const board = document.getElementById('board');
+            board.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* ------------------------------------------------------------------
+           5. RANDOM BRAINROT SENTENCE GENERATOR
+           ------------------------------------------------------------------ */
+        const SUBJECTS = ['P Diddy', 'Bro', 'The Instagram algorithm', 'My last 2 braincells', 'A wild skibidi user', 'The streamer'];
+        const VERBS = ['hosted a freak off during', 'fanum taxed my', 'lost 50,000 aura at', 'consumed excessive weed before', 'started typing shit in'];
+        const OBJECTS = ['the comment section', 'a late night live stream', 'the baby oil inventory room', 'the gym bro meetup', 'the brainrot feed'];
+        const ENDINGS = ['💀💀💀', 'type shit.', 'no cap.', 'real.', 'unspoken rizz moment.'];
+
+        function generateBrainrotSentence() {
+            playGlitchTone(520, 'triangle', 0.1);
+            const s = SUBJECTS[Math.floor(Math.random() * SUBJECTS.length)];
+            const v = VERBS[Math.floor(Math.random() * VERBS.length)];
+            const o = OBJECTS[Math.floor(Math.random() * OBJECTS.length)];
+            const e = ENDINGS[Math.floor(Math.random() * ENDINGS.length)];
+
+            const sentence = `> "${s} ${v} ${o} ${e}"`;
+            document.getElementById('terminal-screen').innerHTML = sentence;
+        }
+
+        function copyTerminalText() {
+            const text = document.getElementById('terminal-screen').innerText;
+            const dummy = document.createElement('textarea');
+            document.body.appendChild(dummy);
+            dummy.value = text.replace('> ', '');
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            const orig = document.getElementById('terminal-screen').innerHTML;
+            document.getElementById('terminal-screen').innerHTML = '> [COPIED TO CLIPBOARD SUCCESSFUL]';
+            setTimeout(() => {
+                document.getElementById('terminal-screen').innerHTML = orig;
+            }, 1200);
+        }
+
+        /* ------------------------------------------------------------------
+           6. CUSTOM CURSOR TRAIL LOGIC
+           ------------------------------------------------------------------ */
+        const dot = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
+
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (dot) {
+                dot.style.left = `${mouseX}px`;
+                dot.style.top = `${mouseY}px`;
+            }
+        });
+
+        function renderCursor() {
+            ringX += (mouseX - ringX) * 0.2;
+            ringY += (mouseY - ringY) * 0.2;
+
+            if (ring) {
+                ring.style.left = `${ringX}px`;
+                ring.style.top = `${ringY}px`;
+            }
+
+            requestAnimationFrame(renderCursor);
+        }
+
+        /* ------------------------------------------------------------------
+           INIT ON LOAD
+           ------------------------------------------------------------------ */
+        window.onload = function() {
+            renderTerms('all');
+            renderCursor();
+            console.log("NIGGERDICK.COM - GOONING ENGINE INITIALIZED.");
+        };
+    </script>
+</body>
+</html>
